@@ -101,7 +101,7 @@ loginUser = async (req, res) => {
         if (!comparison)
         {
             return res
-                .status(401)
+                .status(400)
                 .json({
                     success: false,
                     errorMessage: "Passwords don't match!"

@@ -14,6 +14,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Copyright from './Copyright'
+import ErrorModal from './ErrorModal'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { GlobalStoreContext } from '../store'
 
@@ -112,6 +113,7 @@ export default function LogInScreen() {
                   </Link>
                 </Grid>
               </Grid>
+              <ErrorModal />
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>

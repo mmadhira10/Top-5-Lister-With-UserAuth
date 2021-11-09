@@ -118,6 +118,7 @@ export default function RegisterScreen() {
                             </Grid>
                         </Grid>
                     </Box>
+                    <ErrorModal />
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
             </Container>
