@@ -11,7 +11,8 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { GlobalStoreContext } from '../store'
+import { GlobalStoreContext } from '../store';
+import ErrorModal from './ErrorModal'
 
 export default function RegisterScreen() {
     const { auth } = useContext(AuthContext);
@@ -118,6 +119,7 @@ export default function RegisterScreen() {
                             </Grid>
                         </Grid>
                     </Box>
+                    <ErrorModal />
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
             </Container>

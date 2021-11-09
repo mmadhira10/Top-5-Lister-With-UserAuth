@@ -4,15 +4,21 @@ const bcrypt = require('bcryptjs')
 
 getLoggedIn = async (req, res) => {
     auth.verify(req, res, async function () {
-        const loggedInUser = await User.findOne({ _id: req.userId });
-        return res.status(200).json({
-            loggedIn: true,
-            user: {
-                firstName: loggedInUser.firstName,
-                lastName: loggedInUser.lastName,
-                email: loggedInUser.email
-            }
-        }).send();
+        try{
+            const loggedInUser = await User.findOne({ _id: req.userId });
+            return res.status(200).json({
+                loggedIn: true,
+                user: {
+                    firstName: loggedInUser.firstName,
+                    lastName: loggedInUser.lastName,
+                    email: loggedInUser.email
+                }
+            }).send();
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
     })
 }
 
@@ -78,7 +84,52 @@ registerUser = async (req, res) => {
     }
 }
 
+loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const serverUser = await User.findOne({ email: email });
+        if (!serverUser)
+        {
+            return res
+                .status(400)
+                .json({
+                    success: false,
+                    errorMessage: "An account doesn't exist with this email"
+                })
+        }
+        const comparison = bcrypt.compareSync(password, serverUser.passwordHash)
+        if (!comparison)
+        {
+            return res
+                .status(400)
+                .json({
+                    success: false,
+                    errorMessage: "Passwords don't match!"
+                })
+        }
+        const token = auth.signToken(serverUser);
+
+        await res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        }).status(200).json({
+            success: true,
+            user: {
+                firstName: serverUser.firstName,
+                lastName: serverUser.lastName,
+                email: serverUser.email
+            }
+        }).send();
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send();
+    }
+}
+
 module.exports = {
     getLoggedIn,
-    registerUser
+    registerUser,
+    loginUser
 }
