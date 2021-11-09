@@ -135,6 +135,15 @@ function AuthContextProvider(props) {
         }
     }
 
+    auth.closeErrorModal = async function() {
+        authReducer({
+            type: AuthActionType.ERROR_MSG,
+            payload:{
+                error: ""
+            }
+        })
+    }
+
     return (
         <AuthContext.Provider value={{
             auth
