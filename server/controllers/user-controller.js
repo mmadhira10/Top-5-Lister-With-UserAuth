@@ -128,8 +128,13 @@ loginUser = async (req, res) => {
     }
 }
 
+logoutUser = async (req, res) => {
+    req.clearCookies().status(200).send();
+}
+
 module.exports = {
     getLoggedIn,
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 }

@@ -10,7 +10,8 @@ export const AuthActionType = {
     GET_LOGGED_IN: "GET_LOGGED_IN",
     REGISTER_USER: "REGISTER_USER",
     LOG_IN_USER: "LOG_IN_USER",
-    ERROR_MSG: "ERROR_MSG"
+    ERROR_MSG: "ERROR_MSG",
+    LOG_OUT_USER: "LOG_OUT_USER"
 }
 
 function AuthContextProvider(props) {
@@ -54,6 +55,13 @@ function AuthContextProvider(props) {
                     user: auth.user,
                     loggedIn: auth.loggedIn,
                     error: payload.error
+                })
+            }
+            case AuthActionType.LOG_OUT_USER: {
+                return setAuth({
+                    user: null,
+                    loggedIn: false,
+                    error: auth.error
                 })
             }
             default:
@@ -141,6 +149,13 @@ function AuthContextProvider(props) {
             payload:{
                 error: ""
             }
+        })
+    }
+
+    //Listen to Diljit Dosanjh Lover bomb song
+    auth.logoutUser = async function() {
+        authReducer({
+            type: AuthActionType.LOG_OUT_USER,
         })
     }
 
