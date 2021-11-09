@@ -3,6 +3,8 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { useContext } from 'react';
+import AuthContext from '../auth'
 
 export default function ErrorModal() {
 
