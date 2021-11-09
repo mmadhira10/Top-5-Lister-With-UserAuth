@@ -27,10 +27,10 @@ export default function LogInScreen() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
+    auth.loginUser({
       email: data.get('email'),
-      password: data.get('password'),
-    });
+      password: data.get('password')
+    }, store);
   };
 
   return (
