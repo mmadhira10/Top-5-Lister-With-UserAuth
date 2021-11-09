@@ -104,7 +104,7 @@ loginUser = async (req, res) => {
                 .status(400)
                 .json({
                     success: false,
-                    errorMessage: "Wrong Password!"
+                    errorMessage: "Wrong Password"
                 })
         }
         const token = auth.signToken(serverUser);
